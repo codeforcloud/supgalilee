@@ -24,15 +24,11 @@ resource "azurerm_virtual_machine" "petclinic-vm" {
   os_profile {
     computer_name  = "petclinic-vm-${format("%02d", count.index + 1)}"
     admin_username = "azureuser"
+    admin_password = "SuPG@l1l33!"
   }
 
   os_profile_linux_config {
-    disable_password_authentication = true
-
-    ssh_keys {
-      path     = "/home/azureuser/.ssh/authorized_keys"
-      key_data = "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDWeSBZZiWaLQkKYwxsNhvEur5HLlymF5A6cGcjEvrQzDzLHqe7/yMaenZ9jMGxJ/et8snq3KyDw7VaQvuiAHsZdES0IhDiAb82XkEn8sd7dvRqMXlnIdGpZUJ33UwOevDfn3N6JGK/6uvuJLTFcz5L/K+6pk06ur9Go1gIseCTtjmBqzpgc3bB+mD/uAfLbBXz2kJdc1RnvBk8sBxQ9UXYdwGRdEWA6RvkU1mGaOAMLhKDOxjR6rg8JQe0CTeKVFq9JdCs+KIhOiYkyZBMv8qM0s+PJpblexOoivmgPbQRjaI+qdC/b1QtQzdAPwobFbJeRFT1IrIvKA97YNBtTv8p"
-    }
+    disable_password_authentication = false
   }
 
   tags {
