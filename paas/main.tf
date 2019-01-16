@@ -4,14 +4,11 @@ resource "azurerm_app_service_plan" "app-service-plan" {
   resource_group_name = "${azurerm_resource_group.supgalilee.name}"
   kind                = "linux"
   count               = "${var.count}"
+  reserved            = true
 
   sku {
     tier = "Standard"
     size = "S1"
-  }
-
-  properties {
-    reserved = true
   }
 }
 
@@ -58,7 +55,8 @@ resource "azurerm_mysql_server" "mysql-server" {
 resource "azurerm_mysql_database" "mysql-database" {
   name                = "petclinic"
   resource_group_name = "${azurerm_resource_group.supgalilee.name}"
-  server_name         = "${azurerm_mysql_server.mysql-server.name}"
+  server_name         = "${element(azurerm_mysql_server.mysql-server.*.name, count.index)}"
   charset             = "utf8"
   collation           = "utf8_unicode_ci"
+  count               = "${var.count}"
 }
