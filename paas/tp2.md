@@ -1,5 +1,13 @@
 ## PaaS
 
+## Azure Database for MySQL
+1. Changer dans le ```application-mysql.properties``` la connection string, le user et le password
+```properties
+spring.datasource.url=jdbc:mysql://supgalilee-mysql-server-{nb}.mysql.database.azure.com:3306/{your_database}?useSSL=true&requireSSL=false
+```
+2. Repackager le jar
+3. Lancer en local et vérifier que la connection se fait bien
+
 ## Azure App Service Linux
 1. Ajouter le plugin dans le pom.xml
 
@@ -37,6 +45,15 @@
 </plugin>
 ```
 
+2. Activer le profil MySQL par défaut dans le ```pom.xml```
+```xml
+<!-- Activate MySQL profile -->
+<activation>
+    <activeByDefault>true</activeByDefault>
+</activation>
+```
+
+
 2. Ajouter l'authentification dans le settings.xml
 ```xml
 <server>
@@ -52,16 +69,8 @@
 
 3. Déployer le package sur Azure
 
-## Azure Database for MySQL
-1. Activer le profil MySQL par défaut
-```xml
-<!-- Activate MySQL profile -->
-<activation>
-    <activeByDefault>true</activeByDefault>
-</activation>
-```
-
-2. Modifier le profil MySQL
+## Sécuriser le déploiement
+1. Modifier le profil MySQL
 ```xml
 <profile>
     <id>MySQL</id>
