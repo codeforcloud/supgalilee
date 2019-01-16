@@ -1,12 +1,16 @@
 ## PaaS
 
 ## Azure Database for MySQL
-1. Changer dans le ```application-mysql.properties``` la connection string, le user et le password
+1. Se connecter à la base de données sur Azure
+2. Réimporter les scripts de création de la base de données
+3. Changer dans le ```application-mysql.properties``` la connection string, le user et le password
 ```properties
-spring.datasource.url=jdbc:mysql://supgalilee-mysql-server-{nb}.mysql.database.azure.com:3306/{your_database}?useSSL=true&requireSSL=false
+spring.datasource.url=jdbc:mysql://supgalileemysqlserver{nb}.mysql.database.azure.com:3306/{your_database}
+spring.datasource.username=mysqladmin@supgalileemysqlserver{nb}
+spring.datasource.password=H@Sh1CoR3!
 ```
-2. Repackager le jar
-3. Lancer en local et vérifier que la connection se fait bien
+4. Repackager le jar
+5. Lancer en local et vérifier que la connection se fait bien
 
 ## Azure App Service Linux
 1. Ajouter le plugin dans le pom.xml
